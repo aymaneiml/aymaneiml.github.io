@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aymane Imlihi — Ingénieur Full-Stack Java / Angular</title>
+<meta name="description" content="Portfolio d'Aymane Imlihi, ingénieur full-stack Java / Spring Boot / Angular basé à Rabat, Maroc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c10;
+    --bg-panel:#12151b;
+    --bg-panel-2:#171b23;
+    --border:#232933;
+    --border-soft:#1a1f28;
+    --text:#e7e5e0;
+    --text-muted:#8b92a0;
+    --text-dim:#565d6b;
+    --accent:#e8a33d;
+    --accent-soft:rgba(232,163,61,0.12);
+    --accent-2:#4fb0a5;
+    --accent-2-soft:rgba(79,176,165,0.12);
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+    --maxw:1100px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,12,16,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{
+    font-family:var(--mono); font-size:15px; font-weight:600;
+    color:var(--text);
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{color:var(--accent);}
+  .nav-links{
+    display:flex; gap:28px; list-style:none;
+    font-family:var(--mono); font-size:13px;
+  }
+  .nav-links a{
+    color:var(--text-muted);
+    transition:color .2s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a::before{content:"";}
+
+  .nav-toggle{
+    display:none;
+    background:none; border:1px solid var(--border);
+    border-radius:6px;
+    width:38px; height:38px;
+    color:var(--text);
+    font-family:var(--mono);
+    cursor:pointer;
+  }
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:63px; left:0; right:0;
+      background:var(--bg-panel);
+      border-bottom:1px solid var(--border);
+      flex-direction:column; gap:0;
+      padding:8px 24px;
+      transform:translateY(-8px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .nav-links.open{
+      opacity:1; transform:translateY(0); pointer-events:auto;
+    }
+    .nav-links li{border-top:1px solid var(--border-soft);}
+    .nav-links a{display:block; padding:14px 0;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--accent-2);
+    letter-spacing:0.02em;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"//"; color:var(--text-dim);}
+
+  section{padding:88px 0; border-top:1px solid var(--border-soft);}
+  section:first-of-type{border-top:none;}
+  @media (max-width:760px){ section{padding:56px 0;} }
+
+  h2.title{
+    font-family:var(--mono);
+    font-size:clamp(22px,4vw,30px);
+    font-weight:600;
+    margin-bottom:36px;
+    color:var(--text);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top:72px; padding-bottom:88px; border-top:none;
+    display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center;
+  }
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; gap:40px;} }
+
+  .avatar{
+    width:56px; height:56px; border-radius:50%;
+    border:1.5px solid var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:700; font-size:17px;
+    color:var(--accent);
+    margin-bottom:24px;
+    background:var(--accent-soft);
+  }
+
+  .hero h1{
+    font-family:var(--mono);
+    font-size:clamp(32px,5.5vw,52px);
+    font-weight:700;
+    line-height:1.1;
+    letter-spacing:-0.01em;
+    margin-bottom:14px;
+  }
+  .hero .role{
+    font-size:clamp(15px,2vw,18px);
+    color:var(--accent-2);
+    font-family:var(--mono);
+    margin-bottom:18px;
+  }
+  .hero .pitch{
+    font-size:17px; color:var(--text-muted);
+    max-width:46ch;
+    margin-bottom:32px;
+  }
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:12px 22px; border-radius:8px;
+    border:1px solid var(--border);
+    transition:border-color .2s ease, transform .2s ease, background .2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background:var(--accent); color:#141005; border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover{transform:translateY(-2px); background:#f0ad4d;}
+  .btn-ghost{color:var(--text); }
+  .btn-ghost:hover{border-color:var(--accent-2); color:var(--accent-2); transform:translateY(-2px);}
+
+  /* ---------- TERMINAL (signature element) ---------- */
+  .terminal{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -30px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:7px;
+    padding:12px 16px;
+    background:var(--bg-panel-2);
+    border-bottom:1px solid var(--border);
+  }
+  .term-dot{width:10px; height:10px; border-radius:50%;}
+  .term-dot:nth-child(1){background:#e8636a;}
+  .term-dot:nth-child(2){background:#e8c23d;}
+  .term-dot:nth-child(3){background:#5cc27a;}
+  .term-title{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    margin-left:8px;
+  }
+  .term-body{
+    padding:22px 20px; font-family:var(--mono); font-size:13.5px;
+    min-height:230px;
+  }
+  .term-body .line{margin-bottom:14px; white-space:pre-wrap;}
+  .term-body .prompt{color:var(--accent-2);}
+  .term-body .out{color:var(--text-muted); display:block; margin-top:4px;}
+  .cursor{
+    display:inline-block; width:8px; height:15px; background:var(--accent);
+    margin-left:2px; vertical-align:middle;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px;
+  }
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--text-muted); margin-bottom:16px; max-width:62ch;}
+  .facts{
+    display:flex; flex-direction:column; gap:0;
+    border:1px solid var(--border); border-radius:10px; overflow:hidden;
+    background:var(--bg-panel);
+  }
+  .fact{
+    padding:16px 18px; border-bottom:1px solid var(--border-soft);
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .fact:last-child{border-bottom:none;}
+  .fact .k{font-family:var(--mono); font-size:11.5px; color:var(--accent-2); text-transform:uppercase; letter-spacing:0.04em;}
+  .fact .v{font-size:14px; color:var(--text);}
+
+  /* ---------- EXPERIENCE (timeline) ---------- */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px;
+    width:1px; background:var(--border);
+  }
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-28px; top:5px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .tl-item.current::before{background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft);}
+  .tl-date{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    margin-bottom:6px;
+  }
+  .tl-role{font-size:17px; font-weight:600; color:var(--text); margin-bottom:2px;}
+  .tl-org{font-family:var(--mono); font-size:13px; color:var(--accent-2); margin-bottom:12px;}
+  .tl-item ul{padding-left:18px; color:var(--text-muted); font-size:14.5px;}
+  .tl-item li{margin-bottom:6px;}
+  .tl-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-muted);
+    border:1px solid var(--border); border-radius:20px;
+    padding:4px 11px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:10px;
+    padding:24px; transition:border-color .2s ease, transform .2s ease;
+  }
+  .proj-card:hover{border-color:var(--accent-2); transform:translateY(-3px);}
+  .proj-card h3{font-size:17px; margin-bottom:10px;}
+  .proj-card p{color:var(--text-muted); font-size:14.5px; margin-bottom:16px;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:760px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-cat{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:10px;
+    padding:20px 22px;
+  }
+  .skill-cat h4{
+    font-family:var(--mono); font-size:13px; color:var(--accent);
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .skill-cat h4::before{content:"›"; color:var(--text-dim);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:13px; padding:6px 12px; border-radius:6px;
+    background:var(--accent-2-soft); color:var(--accent-2);
+    font-family:var(--mono);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:12px;
+    padding:40px; text-align:center;
+  }
+  .contact-box p{color:var(--text-muted); max-width:50ch; margin:0 auto 26px;}
+  .contact-links{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:14px;
+  }
+
+  footer{
+    border-top:1px solid var(--border-soft);
+    padding:28px 0; text-align:center;
+    font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo">~/<span class="dot">aymane</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#top">accueil</a></li>
+      <li><a href="#about">à propos</a></li>
+      <li><a href="#experience">expérience</a></li>
+      <li><a href="#projects">projets</a></li>
+      <li><a href="#skills">compétences</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap" id="top">
+    <div>
+      <img src="img/Ajouter_un_titre-removebg-preview.png" alt="Aymane Imlihi" class="avatar" style="object-fit: cover;">
+      <div class="eyebrow">ingénieur full-stack</div>
+      <h1>Aymane Imlihi</h1>
+      <div class="role">Java · Spring Boot · Angular</div>
+      <p class="pitch">Je conçois des applications web robustes et évolutives, du backend sécurisé jusqu'à l'interface utilisateur.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Me contacter</a>
+        <a href="https://github.com/aymaneiml" target="_blank" rel="noopener" class="btn btn-ghost">Voir le code ↗</a>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        <span class="term-title">aymane@rabat: ~</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow">à propos</div>
+      <h2 class="title reveal">Qui je suis</h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>Diplômé d'un Master en Informatique, Gouvernance et Transformation Digitale, je combine une solide expertise sur l'écosystème Java / Spring Boot et Angular avec une compréhension approfondie des architectures modernes et des enjeux de la donnée.</p>
+          <p>J'interviens sur l'ensemble du cycle de développement pour concevoir des solutions web performantes et évolutives, actuellement en stage PFE chez TalentMind à Rabat.</p>
+        </div>
+        <div class="facts reveal">
+          <div class="fact"><span class="k">Localisation</span><span class="v">Rabat, Maroc</span></div>
+          <div class="fact"><span class="k">Formation</span><span class="v">Master Informatique, Gouvernance et Transformation Digitale — Université Mohammed V (2024–2026)</span></div>
+          <div class="fact"><span class="k">Certification</span><span class="v">OCI 2025 Certified Foundations Associate</span></div>
+          <div class="fact"><span class="k">Langues</span><span class="v">Arabe (maternelle) · Français (professionnel) · Anglais (professionnel)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="eyebrow">expérience</div>
+      <h2 class="title reveal">Parcours professionnel</h2>
+      <div class="timeline">
+
+        <div class="tl-item current reveal">
+          <div class="tl-date">Février 2026 — Présent</div>
+          <div class="tl-role">Ingénieur Full-Stack — Stage PFE</div>
+          <div class="tl-org">TalentMind, Rabat, Maroc</div>
+          <ul>
+            <li>Conception et déploiement d'une plateforme web intelligente B2B pour la gestion des flux de recrutement.</li>
+            <li>Développement d'API REST sécurisées (Spring Boot) et d'interfaces dynamiques (Angular).</li>
+            <li>Mise en place de pipelines CI/CD via Azure DevOps et conteneurisation avec Docker.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">API REST</span><span class="tag">Azure DevOps</span><span class="tag">Docker</span><span class="tag">Microservices</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-date">Juillet 2025 — Août 2025</div>
+          <div class="tl-role">Ingénieur Full-Stack — Stage PFA</div>
+          <div class="tl-org">TalentMind, Rabat, Maroc</div>
+          <ul>
+            <li>Création d'une CVthèque intelligente : parsing PDF, algorithme de scoring et authentification sociale.</li>
+            <li>Développement des interfaces de profil sous Angular et sécurisation du backend via JWT/OTP.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tag">Angular</span><span class="tag">Spring Boot</span><span class="tag">JWT</span><span class="tag">OAuth</span><span class="tag">Parsing PDF</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-date">Juillet 2024 — Août 2024</div>
+          <div class="tl-role">Ingénieur Full-Stack — Stage</div>
+          <div class="tl-org">Groupe ONCF, Rabat, Maroc</div>
+          <ul>
+            <li>Automatisation de la centralisation des logs (DAT) et création d'une interface de reporting (Django).</li>
+            <li>Conception d'interfaces responsives avec Bootstrap et gestion des données sous MySQL.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tag">Python</span><span class="tag">Django</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span><span class="tag">UML</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="eyebrow">projets & recherche</div>
+      <h2 class="title reveal">Projets académiques</h2>
+      <div class="proj-grid">
+        <div class="proj-card reveal">
+          <h3>Agent IA pour la Gestion de Stock</h3>
+          <p>Agent intelligent basé sur une architecture RAG (Retrieval-Augmented Generation) couplé à une base de données vectorielle pour interroger et optimiser la gestion des stocks.</p>
+          <div class="chip-row">
+            <span class="chip">Spring AI</span><span class="chip">Vector DB</span>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <h3>Système de Réservation d'Hôtels</h3>
+          <p>Application CRUD complète et sécurisée permettant la gestion des réservations, des chambres et des clients d'un établissement hôtelier.</p>
+          <div class="chip-row">
+            <span class="chip">Spring Boot</span><span class="chip">PostgreSQL</span><span class="chip">Angular</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow">compétences</div>
+      <h2 class="title reveal">Boîte à outils</h2>
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <h4>Full-Stack</h4>
+          <div class="chip-row">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">API REST</span><span class="chip">Kafka</span><span class="chip">Microservices</span><span class="chip">Python</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Bases de données</h4>
+          <div class="chip-row">
+            <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>DevOps & CI/CD</h4>
+          <div class="chip-row">
+            <span class="chip">Docker</span><span class="chip">Azure DevOps</span><span class="chip">GitHub Actions</span><span class="chip">Jenkins</span><span class="chip">Pipelines CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Outils & Qualité</h4>
+          <div class="chip-row">
+            <span class="chip">Spring Security</span><span class="chip">JWT</span><span class="chip">OAuth</span><span class="chip">JUnit</span><span class="chip">Swagger</span><span class="chip">Git</span><span class="chip">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Conception</h4>
+          <div class="chip-row">
+            <span class="chip">MCD/MLD</span><span class="chip">UML</span><span class="chip">Scrum</span><span class="chip">Kanban</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="eyebrow">contact</div>
+      <h2 class="title reveal">Parlons de votre projet</h2>
+      <div class="contact-box reveal">
+        <p>Disponible pour de nouvelles opportunités en développement full-stack. N'hésitez pas à me contacter par e-mail, téléphone ou sur mes réseaux.</p>
+        <div class="contact-links">
+          <a href="mailto:aymaneimlihi@gmail.com" class="btn btn-primary">aymaneimlihi@gmail.com</a>
+          <a href="tel:+212664506818" class="btn btn-ghost">+212 664 506 818</a>
+          <a href="https://www.linkedin.com/in/aymane-imlihi/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+          <a href="https://github.com/aymaneiml" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Aymane Imlihi — Rabat, Maroc
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Scroll reveal
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  } else if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  // Terminal typing effect (hero signature element)
+  var termLines = [
+    {prompt:'$ whoami', out:'Aymane Imlihi — Ingénieur Full-Stack'},
+    {prompt:'$ cat role.txt', out:'Java · Spring Boot · Angular · PostgreSQL'},
+    {prompt:'$ cat location.txt', out:'Rabat, Maroc'},
+    {prompt:'$ status --check', out:'Disponible pour de nouvelles opportunités'}
+  ];
+  var termBody = document.getElementById('termBody');
+
+  function typeLine(text, el, speed, cb){
+    var i = 0;
+    (function step(){
+      if(i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(step, speed);
+      } else if(cb){ cb(); }
+    })();
+  }
+
+  function runTerminal(){
+    if(reduceMotion){
+      termLines.forEach(function(l){
+        var div = document.createElement('div');
+        div.className = 'line';
+        div.innerHTML = '<span class="prompt">'+l.prompt+'</span><span class="out">'+l.out+'</span>';
+        termBody.appendChild(div);
+      });
+      return;
+    }
+    var idx = 0;
+    function next(){
+      if(idx >= termLines.length) return;
+      var l = termLines[idx];
+      var div = document.createElement('div');
+      div.className = 'line';
+      var promptSpan = document.createElement('span');
+      promptSpan.className = 'prompt';
+      div.appendChild(promptSpan);
+      termBody.appendChild(div);
+      typeLine(l.prompt, promptSpan, 28, function(){
+        var outSpan = document.createElement('span');
+        outSpan.className = 'out';
+        div.appendChild(outSpan);
+        setTimeout(function(){
+          typeLine(l.out, outSpan, 14, function(){
+            idx++;
+            setTimeout(next, 320);
+          });
+        }, 150);
+      });
+    }
+    next();
+    var cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    termBody.appendChild(cursor);
+  }
+  runTerminal();
+</script>
+
+</body>
+</html>
